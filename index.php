@@ -1,53 +1,55 @@
-$host = "ec2-54-235-108-217.compute-1.amazonaws.com";
-$port = "5432";
-$dbname = "dav987822a4d5g";
-$user = "jkbkabjuswknzz";
-$password = "433742a75814552fccc3d49c54551698f4f73311e15261248003c93a7fda66f0"; 
-$connection_string = "host={$host} port={$port} dbname={$dbname} user={$user} password={$password} ";
-$dbconn = pg_connect($connection_string);
-if(isset($_POST['submit'])&&!empty($_POST['submit'])){
-    
-    $hashpassword = md5($_POST['pwd']);
-    $sql ="select *from public.tbl_user where username = '".pg_escape_string($_POST['username'])."' and password ='".$hashpassword."'";
-    $data = pg_query($dbconn,$sql); 
-    $login_check = pg_num_rows($data);
-    if($login_check > 0){ 
-        
-        echo "Login Successfully";    
-    }else{
-        
-        echo "Invalid Details";
-    }
-}
-?>
+<?php	 
+ $conn = pg_connect("host=ec2-54-235-108-217.compute-1.amazonaws.com dbname=dav987822a4d5g user=jkbkabjuswknzz password=433742a75814552fccc3d49c54551698f4f73311e15261248003c93a7fda66f0");
+ if(!$conn){echo "Lost Connect";}
+ if(isset($_POST['login'])){
+	$username = $_POST['username'];
+ 	$password = $_POST['password'];
+ 	$sql= "SELECT * FROM tbl_user WHERE user_name ='$username' and pass='$password'";
+	$result = pg_query($conn, $sql);
+	$check = pg_num_rows($result);
+	if($check == 1){
+		echo "Login successfull";
+		header("Location:chucmung.php");
+	}
+	else{
+		echo "Stupid";
+	}
+ }
+		
+
+ ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <title>PHP PostgreSQL Registration & Login Example </title>
-  <meta name="keywords" content="PHP,PostgreSQL,Insert,Login">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<title>Login Page</title>
+   <!--Made with love by Mutiullah Samim -->
+   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+	<!--Custom styles-->
+	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-<div class="container">
-  <h2>Login Here </h2>
-  <form method="post">
-  
-     
-    <div class="form-group">
-      <label for="username">Username:</label>
-      <input type="username" class="form-control" id="username" placeholder="Enter username" name="username">
-    </div>
-    
-     
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-    </div>
-     
-    <input type="submit" name="submit" class="btn btn-primary" value="Submit">
-  </form>
-</div>
+	<div class="container">
+		<div class="card">
+			<h3>Sign In</h3>
+		</div>
+		<form method="post">
+			<div class="card-body">
+				<label>username</label>
+				<input type="text" name="username">
+				<label>password</label>
+				<input type="password" name="password">
+				<button name="login" type="submit" value="login">Login</button>
+			</div>
+		</form>
+	</div>
 </body>
 </html>
