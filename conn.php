@@ -1,6 +1,5 @@
 <?php 
-$conn_string = "host=ec2-54-235-108-217.compute-1.amazonaws.com port=5432 dbname=dav987822a4d5g user=jkbkabjuswknzz password=433742a75814552fccc3d49c54551698f4f73311e15261248003c93a7fda66f0 options='--application_name=$appName'";
-$db_conn = pg_connect($conn_string);
+$conn_string = "host=ec2-54-235-108-217.compute-1.amazonaws.com port=5432 dbname=dav987822a4d5g user=jkbkabjuswknzz password=433742a75814552fccc3d49c54551698f4f73311e15261248003c93a7fda66f0";
 if(isset($_POST['username'])){
   $username = $_POST['username'];
 }
@@ -13,3 +12,4 @@ while ($row = pg_fetch_row($result)) {
     echo "Login successful";
   }
 }
+?>
