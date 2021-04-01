@@ -10,7 +10,7 @@ Tên đăng nhập : <input type='text' name='username' />
 Mật khẩu : <input type='password' name='password' /> 
 <input type='submit' class="button" name="dangnhap" value='Đăng nhập' /> 
 <a href='dangky.php' title='Đăng ký'>Đăng ký</a> 
-<?php require 'xuly.php';?> 
-<form> 
+<?php include 'conn.php';?>
+</form> 
 </body> 
 </html>
