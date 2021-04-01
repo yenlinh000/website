@@ -7,7 +7,7 @@ header('Content-Type: text/html; charset=UTF-8');
 if (isset($_POST['dangnhap']))
 {
 //Kết nối tới database
-include('connect.php');
+include('conn.php');
   
 //Lấy dữ liệu nhập vào
 $username = addslashes($_POST['username']);
@@ -23,7 +23,7 @@ exit;
 $password = md5($password);
   
 //Kiểm tra tên đăng nhập có tồn tại không
-$query = mysql_query("SELECT username, password FROM member WHERE username='$username'");
+$query = mysql_query("SELECT username, password FROM tbl_user WHERE username='$username'");
 if (mysql_num_rows($query) == 0) {
 echo "Tên đăng nhập này không tồn tại. Vui lòng kiểm tra lại. <a href='javascript: history.go(-1)'>Trở lại</a>";
 exit;
