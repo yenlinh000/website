@@ -30,12 +30,12 @@
     <div class="welcome">Welcome</div>
     <form action="/" method="post">
       <div class="wrap">
-        <label>Email</label>
-        <input type="text" class="input">
+        <label>Username</label>
+        <input type="text" name="username">
         </div>
       <div class="wrap">
         <label>Password</label>
-        <input type="password" class="input" data-type="password">
+        <input type="password" name="password">
         </div>
       <div class="wrap">
         <label>Forgot password?</label>
